@@ -4,32 +4,49 @@ const buttonNext = document.querySelector('.slider__arrow_next');
 const imgElements = document.querySelectorAll('.slider__item');
 const images = Array.from(imgElements);
 
-let count = 0;
+const dotElements = document.querySelectorAll('.slider__dot');
+const dots = Array.from(dotElements);
 
-buttonNext.addEventListener('click', () => {
-  const activeElement = document.querySelector('.slider__item_active');
-  activeElement.classList.remove('slider__item_active');
+buttonNext.addEventListener('click', (event) => {
+  const indexActiveElement = images.findIndex((elem) =>
+    elem.matches('.slider__item_active')
+  );
 
-  if (count === images.length - 1) {
-    count = 0;
-  } else {
-    count += 1;
-  }
-
-  const targetElement = images[count];
-  targetElement.classList.add('slider__item_active');
+  activateElement(indexActiveElement + 1);
 });
 
 buttonPrev.addEventListener('click', () => {
-  const activeElement = document.querySelector('.slider__item_active');
-  activeElement.classList.remove('slider__item_active');
+  const indexActiveElement = images.findIndex((elem) =>
+    elem.matches('.slider__item_active')
+  );
 
-  if (count <= 0) {
-    count = images.length - 1;
+  activateElement(indexActiveElement - 1);
+});
+
+dots.forEach((elem) => {
+  elem.addEventListener('click', (event) => {
+    const indexActiveElement = dots.findIndex((elem) => elem === event.target);
+    activateElement(indexActiveElement);
+  });
+});
+
+function activateElement(num) {
+  const activeImg = document.querySelector('.slider__item_active');
+  const actveDot = document.querySelector('.slider__dot_active');
+  activeImg.classList.remove('slider__item_active');
+  actveDot.classList.remove('slider__dot_active');
+
+  let indexNewElement;
+  if (num < 0) {
+    indexNewElement = images.length - 1;
+  } else if (num > images.length - 1) {
+    indexNewElement = 0;
   } else {
-    count -= 1;
+    indexNewElement = num;
   }
 
-  const targetElement = images[count];
-  targetElement.classList.add('slider__item_active');
-});
+  const targetImg = images[indexNewElement];
+  const targetDot = dots[indexNewElement];
+  targetImg.classList.add('slider__item_active');
+  targetDot.classList.add('slider__dot_active');
+}

@@ -1,4 +1,5 @@
 const menuItem = document.querySelectorAll('.menu__item');
+
 Array.from(menuItem).forEach((item) => {
   item.addEventListener('click', (event) => {
     const parent = item.closest('.menu');

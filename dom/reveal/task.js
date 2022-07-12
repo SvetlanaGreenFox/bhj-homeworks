@@ -7,8 +7,14 @@ const isInViewport = function (element) {
 };
 
 window.addEventListener('scroll', () => {
-  if (isInViewport(element)) {
-    // console.log(isInViewport(element));
+  const viewportHeight = window.innerHeight;
+  const elementTop = element.getBoundingClientRect().top;
+  const elementBottom = element.getBoundingClientRect().bottom;
+
+  if (elementTop < viewportHeight) {
     element.classList.add('reveal_active');
+  }
+  if (elementTop < 0 && elementBottom < 0) {
+    element.classList.remove('reveal_active');
   }
 });

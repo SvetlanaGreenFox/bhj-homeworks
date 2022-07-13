@@ -3,7 +3,7 @@ const dropValue = document.querySelector('.dropdown__value');
 const dropList = document.querySelector('.dropdown__list');
 const dropElements = document.querySelectorAll('.dropdown__item');
 const dropValues = Array.from(dropElements);
-
+console.log(dropValue);
 dropValues.forEach((elem) => {
   elem.addEventListener('click', (event) => {
     event.preventDefault();
@@ -12,6 +12,7 @@ dropValues.forEach((elem) => {
       return;
     }
     selectedValue.textContent = value;
+		dropList.classList.remove('dropdown__list_active');
   });
 });
 

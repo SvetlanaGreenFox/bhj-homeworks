@@ -8,14 +8,10 @@ function rotate(prev, next) {
 const activate = (element) => {
   const caseElements = Array.from(element.querySelectorAll('.rotator__case'));
   let count = 0;
-	// let speed = 1000;
-	// console.log('hi');
+	
   setInterval(() => {
 		const prevElement = caseElements[count];
-		// speed = prevElement.dataset.speed;
-		// prevElement.style.color = prevElement.dataset.color;
-		// console.log(prevElement.dataSet.speed);
-		// console.log(prevElement.dataset.color);
+	
 		let idxNext = count + 1;
 		if(idxNext > caseElements.length - 1) {
 			idxNext = 0;

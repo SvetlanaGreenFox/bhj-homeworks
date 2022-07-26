@@ -16,7 +16,6 @@ Array.from(linkElements).forEach((element) => {
     const top = element.getBoundingClientRect().top - 20;
 
     const tooltip = document.createElement('div');
-    //Вопрос: Какаой метод предпочтительнее? Append или TextContent?
     tooltip.textContent = element.title;
     tooltip.classList.add('tooltip_active', 'tooltip');
     tooltip.style.left = `${left}px`;
@@ -24,6 +23,5 @@ Array.from(linkElements).forEach((element) => {
 
     element.after(tooltip);
     element.classList.add('active');
-    console.log(element.classList);
   });
 });

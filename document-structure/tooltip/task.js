@@ -1,3 +1,5 @@
+const linkElements = document.querySelectorAll('.has-tooltip');
+
 Array.from(linkElements).forEach((element) => {
   element.addEventListener('click', (e) => {
     e.preventDefault();

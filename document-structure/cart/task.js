@@ -37,16 +37,18 @@ const checkForProductInCart = (elem) => {
 
   const products = document.querySelectorAll('.cart__product');
 
-  for (let product of Array.from(products)) {
-    if (product.dataset.id === productId) {
-      const count = product.querySelector('.cart__product-count');
-      const currentValue = Number(count.innerHTML);
-      const newValue = Number(productCount.innerHTML);
+  const findProductInCart = Array.from(products).find(
+    (product) => product.dataset.id === productId
+  );
 
-      count.innerHTML = currentValue + newValue;
+  if (findProductInCart) {
+    const count = findProductInCart.querySelector('.cart__product-count');
+    const currentValue = Number(count.innerHTML);
+    const newValue = Number(productCount.innerHTML);
 
-      return;
-    }
+    count.innerHTML = currentValue + newValue;
+
+    return;
   }
 
   const productImg = parent.querySelector('.product__image');

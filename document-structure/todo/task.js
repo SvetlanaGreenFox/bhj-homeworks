@@ -1,35 +1,31 @@
-const input = document.querySelector('.tasks__input');
-
 const tasksList = document.querySelector('#tasks__list');
 
-input.addEventListener('keydown', (e) => {
-  if (e.code === 'Enter') {
-    e.preventDefault();
+const form = document.querySelector('#tasks__form');
 
-    if (e.target.value.length === 0) return;
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
 
-    const userTask = e.target.value;
+  const input = document.querySelector('.tasks__input');
+  const userTask = input.value.trim();
 
-    const taskElement = document.createElement('div');
-    taskElement.classList.add('task');
+  if (userTask.length === 0) return;
 
-    const titleTask = document.createElement('div');
-    titleTask.classList.add('task__title');
-    titleTask.textContent = userTask;
+  const task = `<div class="task">
+                    <div class="task__title">
+                    ${userTask}
+                    </div>
+                    <a href="#" class="task__remove">&times;</a>
+                  </div>`;
 
-    const removeTask = document.createElement('a');
-    removeTask.setAttribute('href', '#');
-    removeTask.innerHTML = '&times;';
-    removeTask.classList.add('task__remove');
-    removeTask.addEventListener('click', (e) => {
+  tasksList.insertAdjacentHTML('beforeEnd', task);
+  input.value = '';
+
+  const removeButtons = document.querySelectorAll('.task__remove');
+
+  Array.from(removeButtons).forEach((elem) => {
+    elem.addEventListener('click', (e) => {
       e.preventDefault();
-      taskElement.remove();
+      e.target.closest('.task').remove();
     });
-
-    taskElement.append(titleTask);
-    taskElement.append(removeTask);
-   
-    tasksList.append(taskElement);
-    e.target.value = '';
-  }
+  });
 });
